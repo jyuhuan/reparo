@@ -10,9 +10,11 @@ trait Map[K, +V] extends HasKey[K] { self =>
   def contains(k: K): Boolean
   def notContains(k: K) = !contains(k)
 
-  def map[W >: V](f: W => W): Map[K, W]
+  def size: Int
 
-  def filter[W >: V](f: W => Boolean): Map[K, V]
+  def map[W](f: V => W): Map[K, W]
+
+  def filter(p: V => Boolean): Map[K, V]
 
   def zip[W](that: Map[K, W]): Map[K, (V, W)]
 

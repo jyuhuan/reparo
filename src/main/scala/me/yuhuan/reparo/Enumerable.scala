@@ -18,7 +18,7 @@ trait Enumerable[+X] extends HasForeach[X] { self =>
   def map[Y](f: X => Y): Enumerable[Y] = new Enumerable[Y] {
     def newEnumerator: Enumerator[Y] = new Enumerator[Y] {
       val e = self.newEnumerator
-      def next: Option[Y] = e.next.map(f)
+      def next: Option[Y] = e.next map f
     }
   }
 

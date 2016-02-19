@@ -8,16 +8,19 @@ import me.yuhuan.reparo.witness.Equivalence
 /**
   * @author Yuhuan Jiang (jyuhuan@gmail.com).
   */
-class HashMap[K, +V] private(elements: HasForeach[(K, V)], val equivalenceOnKey: Equivalence[K]) extends Map[K, V] {
-  val core = scala.collection.immutable.Map(elements.asScala.toSeq: _*)
+class HashMap[K, +V] private(core: scala.collection.immutable.Map[K, V],
+                             val equivalenceOnKey: Equivalence[K]) extends Map[K, V] {
 
   def contains(k: K): Boolean = ???
 
   def apply(k: K): V = core(k)
 
-  def map[W >: V](f: W => W): Map[K, W] = ???
 
-  def filter[W >: V](f: W => Boolean): Map[K, V] = ???
+  def size: Int = core.size
+
+  def map[W](f: (V) => W): Map[K, W] = ???
+
+  def filter(p: (V) => Boolean): Map[K, V] = ???
 
   def pairs: Enumerable[KeyValuePair[K, V]] = ???
 
@@ -27,5 +30,5 @@ class HashMap[K, +V] private(elements: HasForeach[(K, V)], val equivalenceOnKey:
 
 object HashMap {
   def apply[K, V](pairs: (K, V)*)(implicit equivalenceOnKey: Equivalence[K]) =
-    new HashMap[K, V](pairs.asReparo, equivalenceOnKey)
+    new HashMap[K, V](scala.collection.immutable.HashMap[K,V](pairs: _*), equivalenceOnKey)
 }
