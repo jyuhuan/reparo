@@ -60,7 +60,7 @@ trait Seq[+X] extends Enumerable[X] with SortedMap[Int, X] { self =>
     }
   }
 
-  def zip[W](that: Map[Int, W]): Map[Int, (X, W)] = ???
+  override def zip[W](that: Map[Int, W]): Map[Int, (X, W)] = ???
 
 
   def contains(k: Int): Boolean = ???

@@ -22,7 +22,7 @@ trait Enumerable[+X] extends HasForeach[X] { self =>
     }
   }
 
-  def filter(p: X => Boolean): Enumerable[X] = new Enumerable[X] {
+  override def filter(p: X => Boolean): Enumerable[X] = new Enumerable[X] {
     def newEnumerator: Enumerator[X] = new Enumerator[X] {
       val e = self.newEnumerator
       def next: Option[X] = {
